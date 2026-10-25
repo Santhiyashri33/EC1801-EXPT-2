@@ -84,12 +84,48 @@ module tb2;
 endmodule
 
 
-<img width="564" height="199" alt="Screenshot (61)" src="https://github.com/user-attachments/assets/5ae87aeb-cc18-4b0a-a1d5-f58a474f1899" />
+module tb2;
+
+    reg a, b;
+    wire y_and, y_nand, y_or, y_nor, y_xor, y_not;
+
+    // Instantiate the design under test (DUT)
+    basic_gates uut (
+        .a(a),
+        .b(b),
+        .y_and(y_and),
+        .y_nand(y_nand),
+        .y_or(y_or),
+        .y_nor(y_nor),
+        .y_xor(y_xor),
+        .y_not(y_not)
+    );
+
+    initial begin
+        // ---- VCD dump setup ----
+        $dumpfile("basic_gates.vcd");   // name of the VCD file to be generated
+        $dumpvars(0, tb2);               // dump all signals in this testbench hierarchy
+
+        // ---- Apply all 4 input combinations ----
+        $monitor("Time=%0t a=%b b=%b | AND=%b NAND=%b OR=%b NOR=%b XNOR=%b NOT(a)=%b", $time, a, b, y_and, y_nand, y_or, y_nor, y_xor, y_not);
+
+        a = 0; b = 0; #10;
+        a = 0; b = 1; #10;
+        a = 1; b = 0; #10;
+        a = 1; b = 1; #10;
+
+        #10 $finish;
+#10;
+    end
+
+endmodule
 
 
 
 
- 
+<img width="727" height="257" alt="WhatsApp Image 2026-10-25 at 10 26 07 AM" src="https://github.com/user-attachments/assets/df5251d8-c31c-4422-8497-13f75c6ea1d2" />
+
+
 
 
 # Simulation Procedure
@@ -117,21 +153,7 @@ Other option
 dve -full64 &
 A DVE environment will open.
 
-DVE Waveform Verification
-In DVE:
-Open the testbench hierarchy.
-Locate the signals: 
-a
-b
-y_and
-y_or
-y_not
-Add the signals to the waveform window.
-Run/inspect the waveform.
-Verify that y_and = 1 only when a=1 AND b=1 — the single combination where both inputs are high.
-Verify that y_or = 1 whenever a=1 OR b=1 (any input high forces the output high).
-Verify that y_not is always the exact complement of a, regardless of b.
-The waveform should agree with the truth table.
+
 # Expected Result
 The basic logic gates — AND, OR, and NOT — were realized using Verilog HDL:
 Y_AND = A.B
@@ -141,9 +163,12 @@ Y_NAND = (A.B)'
 Y_NOR = (A+B)'
 Y_XOR = A'B + AB'
 The design was compiled and simulated using Synopsys VCS, and the functionality was verified using DVE waveform analysis, matching the expected truth table.
-<img width="564" height="199" alt="Screenshot (61)" src="https://github.com/user-attachments/assets/3e5dfeb1-84a6-4607-b283-5f69e8915b0a" />
+<img width="974" height="262" alt="WhatsApp Image 2026-10-25 at 10 26 11 AM" src="https://github.com/user-attachments/assets/6921a398-2211-4bf4-86a0-3260cde64bed" />
+
 
 Output
 # OUTPUT
+<img width="1789" height="779" alt="Screenshot (62)" src="https://github.com/user-attachments/assets/d8b42937-5579-425f-a822-71c9cc3022c7" />
+
 
  
