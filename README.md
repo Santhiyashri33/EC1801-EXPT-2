@@ -13,7 +13,7 @@ The basic logic gates realize the following Boolean functions:
 •	AND: Y_AND = A . B
 •	OR: Y_OR = A + B
 •	NOT: Y_NOT = A'
-•	NAND: Y_NAND = (A.B)'
+•NAND: 	Y_NAND = (A.B)'
 •	NOR: Y_NOR = (A+B)'
 •	XOR: Y_XOR = A'B + AB'
 
@@ -84,11 +84,13 @@ module tb2;
 endmodule
 
 
+<img width="564" height="199" alt="Screenshot (61)" src="https://github.com/user-attachments/assets/5ae87aeb-cc18-4b0a-a1d5-f58a474f1899" />
+
 
 
 
  
-<img width="940" height="318" alt="image" src="https://github.com/user-attachments/assets/8a343bdb-ffb4-4aac-8b88-cf59eca374a8" />
+
 
 # Simulation Procedure
 STEP 1 – Open Terminal
@@ -135,31 +137,13 @@ The basic logic gates — AND, OR, and NOT — were realized using Verilog HDL:
 Y_AND = A.B
 Y_OR = A+B
 Y_NOT = A'
+Y_NAND = (A.B)'
+Y_NOR = (A+B)'
+Y_XOR = A'B + AB'
 The design was compiled and simulated using Synopsys VCS, and the functionality was verified using DVE waveform analysis, matching the expected truth table.
+<img width="564" height="199" alt="Screenshot (61)" src="https://github.com/user-attachments/assets/3e5dfeb1-84a6-4607-b283-5f69e8915b0a" />
+
 Output
 # OUTPUT
-<img width="1920" height="1080" alt="Screenshot (41)" src="https://github.com/user-attachments/assets/1d1848ed-6841-4281-8fc0-7ee1d1fa5ea0" />
-
 
  
-# Viva-Voce Questions
-
-•	What is a logic gate?
-
-•	What are the basic logic gates in digital electronics?
-
-•	What is the Boolean expression for an AND gate? An OR gate? A NOT gate?
-
-•	Why is the NOT gate also called an inverter?
-
-•	What is a universal gate, and how can NAND/NOR realize AND, OR, and NOT?
-
-•	What is the purpose of a Verilog testbench?
-
-•	Why is a VCD file generated?
-
-•	What is the purpose of ./simv?
-•	What is the purpose of DVE?
-•	What is the difference between simulation and synthesis?
-•	What is the difference between $dumpfile and $dumpvars?
-
