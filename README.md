@@ -13,6 +13,10 @@ The basic logic gates realize the following Boolean functions:
 •	AND: Y_AND = A . B
 •	OR: Y_OR = A + B
 •	NOT: Y_NOT = A'
+•	NAND: Y_NAND = (A.B)'
+•	NOR: Y_NOR = (A+B)'
+•	XOR: Y_XOR = A'B + AB'
+
 
 # Theory / Synopsis
 Logic gates are the basic building blocks of digital systems. NAND and NOR are universal gates. XOR produces 1 when its inputs differ, while XNOR produces 1 when its inputs are equal.
@@ -26,20 +30,27 @@ module basic_gates (
     input  wire b,
     output wire y_and,
     output wire y_or,
-    output wire y_not
+    output wire y_not,
+    output wire y_nand,
+    output wire y_nor,
+    output wire y_xor
 );
 
     assign y_and = a & b;   // AND gate
     assign y_or  = a | b;   // OR gate
     assign y_not = ~a;      // NOT gate (inverter)
+    assign y_nand = ~(a & b);  // NAND gate
+    assign y_nor = ~(a | b);  // NOR gate
+    assign y_xot = a ^ b; // XOR gate
 
 endmodule
+
 
 # **Test Bench Program**
 module tb2;
 
     reg a, b;
-    wire y_and, y_or, y_not;
+    wire y_and, y_or, y_not,y_nand, y_nor, y_xor;
 
     // Instantiate the design under test (DUT)
     basic_gates uut (
@@ -47,7 +58,10 @@ module tb2;
         .b(b),
         .y_and(y_and),
         .y_or(y_or),
-        .y_not(y_not)
+        .y_not(y_not),
+        .y_nand(y_nand),
+        .y_nor(y_nor),
+        .y_xor(y_xor)
     );
 
     initial begin
@@ -56,7 +70,7 @@ module tb2;
         $dumpvars(0, tb2);               // dump all signals in this testbench hierarchy
 
         // ---- Apply all 4 input combinations ----
-        $monitor("Time=%0t a=%b b=%b | AND=%b OR=%b NOT(a)=%b", $time, a, b, y_and, y_or, y_not);
+        $monitor("Time=%0t a=%b b=%b | AND=%b OR=%b NOT(a)=%b NAND=%b NOR=%b XOR=%b", $time, a, b, y_and, y_or, y_not, y_nand, y_nor, y_xor);
 
         a = 0; b = 0; #10;
         a = 0; b = 1; #10;
@@ -68,6 +82,7 @@ module tb2;
     end
 
 endmodule
+
 
 
 
